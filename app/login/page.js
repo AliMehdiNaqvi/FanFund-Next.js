@@ -13,7 +13,7 @@ import {
   FaApple,
 } from "react-icons/fa";
 
-const page = () => {
+const Page = () => {
   const { data: session } = useSession()
   const router = useRouter()
   useEffect(() => {
@@ -78,5 +78,5 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
 
