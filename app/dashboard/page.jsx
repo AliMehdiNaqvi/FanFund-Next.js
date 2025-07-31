@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import { motion } from "framer-motion";
+import { ToastContainer, toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
@@ -21,7 +22,7 @@ const dashboard = () => {
   const [form, setForm] = useState({
 
     email: '',
-    // username: '',
+
     Profession: '',
     profilePic: '',
     coverPic: '',
@@ -35,7 +36,8 @@ const dashboard = () => {
   };
 
   const handleSave = async () => {
-    if (!session?.user?.email) return alert("User not logged in");
+
+    if (!session?.user?.email) return toast.error("User not logged in");
     const dataToSend = {
       userEmail: session.user.email,
       ...form,
@@ -49,13 +51,13 @@ const dashboard = () => {
 
       const data = await res.json();
       if (data.success) {
-        alert("Dashboard data saved successfully!");
+        toast.success("Your page is updated successfully!");
       } else {
-        alert("Error saving data");
+        toast.error("Error updating your page");
       }
     } catch (err) {
       console.error("Save failed:", err);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     }
 
     ;
@@ -73,17 +75,7 @@ const dashboard = () => {
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">🧾 Creator Dashboard</h1>
 
         <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 space-y-5">
-          {/* <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input
-              type="text"
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              placeholder="Public username"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            />
-          </div> */}
+
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
@@ -97,28 +89,7 @@ const dashboard = () => {
           </div>
 
 
-          {/* <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            />
-          </div> */}
 
-          {/* Username */}
-          {/* <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-            <input
-              type="text"
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            />
-          </div> */}
 
           {/* Profile Pic */}
           <div>
@@ -177,6 +148,7 @@ const dashboard = () => {
           </button>
         </div>
       </div>
+      <ToastContainer position="top-center" autoClose={3000} />
     </motion.div>
 
   )

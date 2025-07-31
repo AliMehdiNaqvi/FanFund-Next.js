@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import SupportAndPay from "../Components/SupportAndPay";
+
+
 
 
 const Username = () => {
@@ -47,27 +48,22 @@ const Username = () => {
     >
       {/* Banner */}
       <div className="relative w-full h-60 md:h-80 rounded-2xl overflow-hidden shadow-xl">
-        <Image
+        <img
           src={userData?.coverPic || defaultCover}
           alt="Banner"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-2xl"
-          priority
+          className="w-full h-full object-cover rounded-2xl"
         />
       </div>
 
       {/* Profile */}
       <div className="absolute top-44 left-1/2 transform -translate-x-1/2 md:top-56 z-10">
         <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg overflow-hidden">
-          <Image
+          <img
             src={userData?.profilePic || defaultProfile}
             alt="Profile"
-            width={160}
-            height={160}
-            className="rounded-full"
-            priority
+            className="w-full h-full rounded-full"
           />
+
         </div>
       </div>
 
@@ -87,25 +83,7 @@ const Username = () => {
         )}
       </div>
 
-      {/* Static Stats */}
-      <div className="grid grid-cols-4 gap-4 mt-4 text-center text-xs text-gray-600">
-        <div>
-          <p className="text-base font-bold text-gray-900">24</p>
-          <p>Posts</p>
-        </div>
-        <div>
-          <p className="text-base font-bold text-gray-900">3.5k</p>
-          <p>Members</p>
-        </div>
-        <div>
-          <p className="text-base font-bold text-gray-900">8</p>
-          <p>Releases</p>
-        </div>
-        <div>
-          <p className="text-base font-bold text-green-600">$2,560</p>
-          <p>Earned</p>
-        </div>
-      </div>
+      
 
       <SupportAndPay />
     </motion.section>
